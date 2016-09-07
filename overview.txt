@@ -1,0 +1,9 @@
+"A short overview paper, providing information that is not readily available 
+from reading the code, incomplete specifications, things that gave you trouble, 
+etc. This paper should be plain ASCII text."
+
+Joshua Zarin
+8/25/2016-_/__/____
+CS414 Design Assignment A1 Overview
+
+-
