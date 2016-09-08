@@ -1,4 +1,9 @@
-//hello
+/*
+ * Joshua Zarin
+ * 9/8/16
+ * CS414 A1
+ * Company.java
+ */
 import java.util.*;
 
 public class Company {
@@ -80,16 +85,70 @@ public class Company {
 	}
 	
 	//unassign (worker, project)
+	public void unassign(Worker employee, Project proj){
+		if(proj.getProjectWorkers().contains(employee)){
+			proj.removeWorker(employee);
+			if(proj.missingQualifications().size() > 0 && proj.getStatus() == ProjectStatus.ACTIVE){
+				proj.setStatus(ProjectStatus.SUSPENDED);
+			}
+			employee.removeProject(proj);
+			if(employee.workerProjects.size() == 0){
+				assignedWorkerPool.remove((Worker)employee);
+			}
+		}
+	}
 	
 	//unassign all (worker)-remove worker from all his projects
+	public void unassignAll(Worker employee){
+		Iterator<Project> it = employee.workerProjects.iterator();
+		while(it.hasNext()){
+			Object comparee = it.next();
+			if(comparee instanceof Project){
+				employee.removeProject((Project)comparee);
+				((Project)comparee).removeWorker(employee);
+				if(((Project) comparee).missingQualifications().size() > 0 && ((Project)comparee).getStatus() == ProjectStatus.ACTIVE){
+					((Project)comparee).setStatus(ProjectStatus.SUSPENDED);
+				}
+			}
+		}
+		assignedWorkerPool.remove((Worker)employee);
+	}
 	
 	//start(project): planned/suspended project become active 
 		//if qualification requirements are met, else stay planned/suspended
+	public void start(Project proj){
+		if(proj.getStatus() == ProjectStatus.PLANNED || proj.getStatus() == ProjectStatus.SUSPENDED){
+			if(proj.missingQualifications().size() == 0){
+				proj.setStatus(ProjectStatus.ACTIVE);
+			}
+		}
+	}
 	
 	//finish(project): mark active project as finished. all workers only on this
 		//project are removed from assigned workers, suspended or planned projects
 		//stay that way and can't be finished unless active
+	public void finish(Project proj){
+		if(proj.getStatus() == ProjectStatus.ACTIVE){
+			Iterator<Worker> it = proj.projectWorkers.iterator();
+			while(it.hasNext()){
+				Object comparee = it.next();
+				if(comparee instanceof Worker){
+					proj.removeWorker((Worker)comparee);
+					((Worker) comparee).removeProject(proj);
+					if(((Worker)comparee).workerProjects.size() == 0){
+						assignedWorkerPool.remove((Worker)comparee);
+					}
+				}
+			}
+			proj.setStatus(ProjectStatus.FINISHED);
+		}
+	}
 	
 	//createProject
+	public Project createProject(String n, Set<Qualification> qs, ProjectSize size, ProjectStatus status){
+		Project p = new Project(n, size, status);
+		p.Qualifications = qs;
+		return p;
+	}
 }
 

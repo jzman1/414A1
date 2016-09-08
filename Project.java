@@ -1,3 +1,9 @@
+/*
+ * Joshua Zarin
+ * 9/8/16
+ * CS414 A1
+ * Project.java
+ */
 import java.util.*;
 
 public class Project {
@@ -5,7 +11,7 @@ public class Project {
 	protected ProjectSize projectSize;
 	protected ProjectStatus projectStatus;
 	protected Set<Worker> projectWorkers = new HashSet<Worker>();//MAYBE?!?!
-	protected Set<Qualification> Qualifications;
+	protected Set<Qualification> Qualifications = new HashSet<Qualification>();
 
 	public Project(String name, ProjectSize size, ProjectStatus status){
 		this.projectName = name;
@@ -74,6 +80,9 @@ public class Project {
 	//********for company
 	public void addWorker(Worker employee){
 		projectWorkers.add(employee);
+	}
+	public void removeWorker(Worker employee){
+		projectWorkers.remove((Worker)employee);
 	}
 	//********for company
 	

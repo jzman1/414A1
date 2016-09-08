@@ -1,3 +1,9 @@
+/*
+ * Joshua Zarin
+ * 9/8/16
+ * CS414 A1
+ * Worker.java
+ */
 import java.util.Iterator;
 import java.util.Set;
 
@@ -46,6 +52,9 @@ public class Worker {
 	//********HELPER FOR PROJECTS
 	public void addProject(Project p){
 		workerProjects.add(p);
+	}
+	public void removeProject(Project p){
+		workerProjects.remove((Project)p);
 	}
 	//********HELPER FOR PROJECTS
 	
