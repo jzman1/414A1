@@ -1,4 +1,9 @@
-
+/*
+ * Joshua Zarin
+ * 9/8/16
+ * CS414 A1
+ * Qualification.java
+ */
 public class Qualification {
 	protected String qualificationDescription;
 	
@@ -20,8 +25,4 @@ public class Qualification {
 		}
 		return ret;
 	}
-	
-
-
 }
-
