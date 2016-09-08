@@ -4,7 +4,8 @@ public class Project {
 	protected String projectName;
 	protected ProjectSize projectSize;
 	protected ProjectStatus projectStatus;
-	protected Set<Worker> projectWorkers;//MAYBE?!?!
+	protected Set<Worker> projectWorkers = new HashSet<Worker>();//MAYBE?!?!
+	protected Set<Qualification> Qualifications;
 
 	public Project(String name, ProjectSize size, ProjectStatus status){
 		this.projectName = name;
@@ -23,6 +24,12 @@ public class Project {
 	public ProjectStatus getStatus(){
 		return projectStatus;
 	}
+
+	//***** needed for company
+	public Set<Worker> getProjectWorkers(){
+		return projectWorkers;
+	}
+	//***** needed for company
 	
 	public void setStatus(ProjectStatus status){
 		this.projectStatus = status;
@@ -39,30 +46,50 @@ public class Project {
 		return ret;
 	}
 	
-	public String toString(){	//project workers MAYBE?!?!
+	public String toString(){
 		return getName() + ":" + projectWorkers.size() + ":" + getStatus();//.getName().toUpperCase();
 	}
 	
 	public Set<Qualification> missingQualifications(){ 
-		//Set<Qualification> missingQ;
-		
-		Iterator<Worker> it = projectWorkers.iterator();
-		while(it.hasNext()){
-			Object comparee = it.next();
-			if(comparee instanceof Worker){
-				
+		Set<Qualification> missingQ = new HashSet<Qualification>(Qualifications);
+		Iterator<Worker> it1 = projectWorkers.iterator();
+		while(it1.hasNext()){
+			Object comparee1 = it1.next();
+			if(comparee1 instanceof Worker){
+				Iterator<Qualification> it2 = ((Worker) comparee1).getQualifications().iterator();
+				while(it2.hasNext()){
+					Object comparee2 = it2.next();
+					if(comparee2 instanceof Qualification){
+						if(Qualifications.contains(comparee2)){
+							missingQ.remove((Qualification)comparee2);
+						}
+					}
+				}
 			}
 		}
-		//return missing worker qualifications
-		//or empty, not null, set if none are
-		//missing
-		return null;
+		return missingQ;
 	}
 	
+	
+	//********for company
+	public void addWorker(Worker employee){
+		projectWorkers.add(employee);
+	}
+	//********for company
+	
 	public boolean isHelpful(Worker w){
+		boolean ret = false;
 		//if new added worker satisfies missing qualification(s), then true, else false
-		return false;
-		
+		Iterator<Qualification> it = w.getQualifications().iterator();
+		while(it.hasNext()){
+			Object comparee = it.next();
+			if(comparee instanceof Qualification){
+				if(this.missingQualifications().contains((Qualification)comparee) == false){
+					ret = true;
+				}
+			}
+		}
+		return ret;
 	}
 }
 

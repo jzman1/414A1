@@ -6,4 +6,8 @@ Joshua Zarin
 8/25/2016-_/__/____
 CS414 Design Assignment A1 Overview
 
--
+-First, I constructed the class methods for Company, Project, Qualification, and Worker.java in order to lay out a barebone structure for the project's system.
+
+-Soon after filling the java files with barebone un-tested skeleton methods, I created a git repository (https://github.com/jzman1/414A1.git) in order to have revision control for safe code development.
+
+-After creating a functional git repository, I finished all of my barebone methods to have something to test

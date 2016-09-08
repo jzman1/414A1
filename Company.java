@@ -2,33 +2,45 @@
 import java.util.*;
 
 public class Company {
-	protected String CompanyName = "";
-	protected ArrayList<Worker> assignedWorkerPool;
-	protected ArrayList<Worker> availableWorkerPool;//employed workers
-	protected ArrayList<Worker> projects;
+	protected String Name = "";
+	protected Set<Worker> assignedWorkerPool;
+	protected Set<Worker> availableWorkerPool;//employed workers
+	protected Set<Project> projects;
 	
 	
 	public Company(String name){
-		this.CompanyName=name;
+		this.Name=name;
 	}
 	
 	public String getName(){
-		return CompanyName;
+		return Name;
 	}
 	
 	//get available workers: set(Worker)
-	public ArrayList<Worker> getAvailableWorkers(){
+	public Set<Worker> getAvailableWorkers(){
 		return availableWorkerPool;
 	}
 	
 	//get assigned workers: set(Worker)
-	public ArrayList<Worker> getAssignedWorkers(){
+	public Set<Worker> getAssignedWorkers(){
 		return assignedWorkerPool;
 	}
 	
 	
 	//get unassigned workers: set(Worker)
-	//***********************************
+	public Set<Worker> getUnassignedWorkers(){
+		Set<Worker> rets = new HashSet<Worker>();
+		Iterator<Worker> it = availableWorkerPool.iterator();
+		while(it.hasNext()){
+			Object comparee = it.next();
+			if(comparee instanceof Worker){
+				if(assignedWorkerPool.contains((Worker)comparee) == false){
+					rets.add((Worker)comparee);
+				}
+			}
+		}
+		return rets;	
+	}
 	
 	//equals (company names)
 	@Override
@@ -51,10 +63,21 @@ public class Company {
 	
 	//add to available worker pool: worker not 
 		//in available workers now in available workers
+	public void addToAvailableWorkerPool(Worker employee){
+		availableWorkerPool.add(employee);	//set will not add duplicate if employee is already in pool
+	}
 	
 	//assign (worker(available worker pool, not 
 		//assigned to this project already), project(not
 		//active or finished state))
+	public void assign(Worker employee, Project proj){
+		Set<Worker> ProjWorkers = proj.getProjectWorkers();
+		if(availableWorkerPool.contains(employee) && (ProjWorkers.contains(employee)==false) && proj.getStatus()!= ProjectStatus.ACTIVE && proj.getStatus() != ProjectStatus.FINISHED && proj.isHelpful(employee) && (employee.willOverload(proj) == false)){
+			assignedWorkerPool.add(employee);
+			proj.addWorker(employee);		
+			employee.addProject(proj);
+		}
+	}
 	
 	//unassign (worker, project)
 	
