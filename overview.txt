@@ -11,3 +11,6 @@ CS414 Design Assignment A1 Overview
 -Soon after filling the java files with barebone un-tested skeleton methods, I created a git repository (https://github.com/jzman1/414A1.git) in order to have revision control for safe code development.
 
 -After creating a functional git repository, I finished all of my barebone methods to have something to test
+
+-After finishing barebone methods, I began testing using JUnit per class
+	-found errors in Worker.java (toString method had null pointer exception found with JUnit testing)

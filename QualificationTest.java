@@ -17,6 +17,7 @@ public class QualificationTest {
 		assertEquals("Objects 1 and 2 are not equal",test1, test2);
 		Qualification test3 = test1;
 		assertSame("Objects 3 and 1 aren't the same", test3, test1);
+		System.out.println("-----End test creation-----");
 	}
 	
 	@Test
@@ -26,7 +27,9 @@ public class QualificationTest {
 		String tester = "This is a test";
 		String ftester = "This is not a test";
 		assertTrue("Object 1 doesn't equal correct string",test1.toString() == tester);
+		System.out.println(test1.toString());
 		assertFalse("object 1 equals incorrect string",test1.toString() == ftester);
+		System.out.println("-----End test toString-----");
 	}
 	
 	@Test
@@ -38,5 +41,8 @@ public class QualificationTest {
 		assertTrue("Objects 1 and 2 are not equal according to their override equals", test1.equals(test2));
 		Qualification test3 = new Qualification("This is not a test");
 		assertFalse("Objects 3 and 1 are equal", test3.equals(test1));
+		System.out.println(test1.equals(test2));
+		System.out.println(test1.equals(test3));
+		System.out.println("-----End test equals-----");
 	}
 }
