@@ -8,9 +8,9 @@ import java.util.*;
 
 public class Company {
 	protected String Name = "";
-	protected Set<Worker> assignedWorkerPool;
-	protected Set<Worker> availableWorkerPool;//employed workers
-	protected Set<Project> projects;
+	protected Set<Worker> assignedWorkerPool = new HashSet<Worker>();
+	protected Set<Worker> availableWorkerPool = new HashSet<Worker>();//employed workers
+	protected Set<Project> projects = new HashSet<Project>();
 	
 	
 	public Company(String name){
@@ -147,7 +147,8 @@ public class Company {
 	//createProject
 	public Project createProject(String n, Set<Qualification> qs, ProjectSize size, ProjectStatus status){
 		Project p = new Project(n, size, status);
-		p.Qualifications = qs;
+		this.projects.add(p);
+		p.missingQualifications = qs;
 		return p;
 	}
 }

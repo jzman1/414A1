@@ -155,11 +155,11 @@ public class ProjectTest {
 		Set<Qualification> Quals = new HashSet<Qualification>();
 		Quals.add(q1);
 		Quals.add(q2);
-		Worker test1 = new Worker("Bob",Quals);
+		Worker test1 = new Worker("Bob",new HashSet<Qualification>(Quals));
 		Quals.add(q3);
-		Worker test2 = new Worker("Loe",Quals);
+		Worker test2 = new Worker("Loe",new HashSet<Qualification>(Quals));
 		Quals.add(q4);
-		p0.Qualifications = Quals;
+		p0.missingQualifications = new HashSet<Qualification>(Quals);
 		p0.addWorker(test1);
 		p0.addWorker(test2);
 		System.out.println('\n' + "Test missingQualifications (missing Completion cost)");
@@ -167,6 +167,7 @@ public class ProjectTest {
 		Quals.remove(q2);
 		Quals.remove(q3);
 		assertEquals(p0.missingQualifications(),Quals);
+		assertTrue(p0.missingQualifications().size() == Quals.size());
 		System.out.println('\n' + "-----End test missingQualificatiosn-----");
 		System.out.println("------------------------------------------------------------");
 	}
@@ -221,6 +222,32 @@ public class ProjectTest {
 	@Test
 	public void testIsHelpful(){
 		System.out.println('\n' + "-----Testing Project isHelpful method-----");
+		Project p0 = new Project("Test Project 0", ProjectSize.MEDIUM,ProjectStatus.ACTIVE);
+		Qualification q1 = new Qualification("Education");
+		Qualification q2 = new Qualification("Completion Speed");
+		Qualification q3 = new Qualification("Completion accuracy");
+		Qualification q4 = new Qualification("Completion cost");
+		Qualification q5 = new Qualification("HR training");
+		Set<Qualification> Quals = new HashSet<Qualification>();
+		Quals.add(q1);
+		Quals.add(q2);
+		Worker test1 = new Worker("Bob",new HashSet<Qualification>(Quals));
+		Quals.add(q3);
+		Worker test2 = new Worker("Loe",new HashSet<Qualification>(Quals));
+		Quals.add(q4);
+		p0.missingQualifications = new HashSet<Qualification>(Quals);
+		p0.addWorker(test1);
+		p0.addWorker(test2);
+		System.out.println('\n' + "Test missingQualifications (missing Completion cost)");
+		Quals.remove(q1);
+		Quals.remove(q2);
+		Quals.remove(q3);
+		Worker test3 = new Worker("Carl",new HashSet<Qualification>(Quals));
+		assertTrue(p0.isHelpful(test3));
+		Quals.add(q5);
+		Quals.remove(q4);
+		Worker test4 = new Worker("Carlos",new HashSet<Qualification>(Quals));
+		assertFalse(p0.isHelpful(test4));
 		System.out.println('\n' + "-----End test isHelpful-----");
 		System.out.println("------------------------------------------------------------");
 	}

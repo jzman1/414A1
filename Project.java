@@ -11,7 +11,7 @@ public class Project {
 	protected ProjectSize projectSize;
 	protected ProjectStatus projectStatus;
 	protected Set<Worker> projectWorkers = new HashSet<Worker>();//MAYBE?!?!
-	protected Set<Qualification> Qualifications = new HashSet<Qualification>();
+	protected Set<Qualification> missingQualifications = new HashSet<Qualification>();
 
 	public Project(String name, ProjectSize size, ProjectStatus status){
 		this.projectName = name;
@@ -57,7 +57,6 @@ public class Project {
 	}
 	
 	public Set<Qualification> missingQualifications(){ 
-		Set<Qualification> missingQ = new HashSet<Qualification>(Qualifications);
 		Iterator<Worker> it1 = projectWorkers.iterator();
 		while(it1.hasNext()){
 			Object comparee1 = it1.next();
@@ -66,14 +65,14 @@ public class Project {
 				while(it2.hasNext()){
 					Object comparee2 = it2.next();
 					if(comparee2 instanceof Qualification){
-						if(Qualifications.contains(comparee2)){
-							missingQ.remove((Qualification)comparee2);
+						if(missingQualifications.contains(comparee2)){
+							missingQualifications.remove((Qualification)comparee2);
 						}
 					}
 				}
 			}
 		}
-		return missingQ;
+		return missingQualifications;
 	}
 	
 	
@@ -93,7 +92,7 @@ public class Project {
 		while(it.hasNext()){
 			Object comparee = it.next();
 			if(comparee instanceof Qualification){
-				if(this.missingQualifications().contains((Qualification)comparee) == false){
+				if(this.missingQualifications().contains((Qualification)comparee) == true){
 					ret = true;
 				}
 			}
