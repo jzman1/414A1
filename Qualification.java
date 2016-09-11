@@ -4,6 +4,7 @@
  * CS414 A1
  * Qualification.java
  */
+package cs414.a1.jzman1;
 public class Qualification {
 	protected String qualificationDescription;
 	

@@ -4,6 +4,7 @@
  * CS414 A1
  * QualificationTest.java
  */
+package cs414.a1.jzman1;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

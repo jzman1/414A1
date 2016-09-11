@@ -4,6 +4,7 @@
  * CS414 A1
  * testAll.java
  */
+package cs414.a1.jzman1;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.RunWith;

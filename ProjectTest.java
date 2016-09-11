@@ -4,6 +4,7 @@
  * CS414 A1
  * Project.java
  */
+package cs414.a1.jzman1;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -5,7 +5,7 @@
  * Worker.java
  */
 import java.util.*;
-
+package cs414.a1.jzman1;
 public class Worker {
 	protected String Name;
 	protected Set<Qualification> workerQualifications;

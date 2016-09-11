@@ -4,6 +4,7 @@
  * CS414 A1
  * Company.java
  */
+package cs414.a1.jzman1;
 import java.util.*;
 
 public class Company {
