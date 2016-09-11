@@ -1,2 +1,0 @@
-jar xvf a1.jar 
-jar xvf a1.jar *.****
