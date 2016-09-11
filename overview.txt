@@ -3,7 +3,7 @@ from reading the code, incomplete specifications, things that gave you trouble,
 etc. This paper should be plain ASCII text."
 
 Joshua Zarin
-8/25/2016-_/__/____
+8/25/2016
 CS414 Design Assignment A1 Overview
 
 -First, I constructed the class methods for Company, Project, Qualification, and Worker.java in order to lay out a barebone structure for the project's system.
@@ -15,5 +15,13 @@ CS414 Design Assignment A1 Overview
 -After finishing barebone methods, I began testing using JUnit per class
 	-found errors in Worker.java (toString method had null pointer exception found with JUnit testing)
 	-found errors in Worker.java (willOverload method was not correctly counting overloads, caught and fixed using JUnit testing)
-	-found errors in Project.java (missingQualifications)
+	-found errors in Project.java (missingQualifications was not properly working due to set equality (needed to copy sets), caught and fixed using JUnit testing)
 	-found errors in Company.java (createProject was not properly adding project associations with their correlated company)
+	-found errors in Company.java (unassignAll was not properly working due to concurrency issues)
+	-found errors in Company.java (finish was not working properly due to concurrency issues)
+
+-After finishing the JUnit tests I completed TestAll.java, ensuring that all of the tests were executed from this one class.
+
+-All of the print statements are commented out for clean testing
+
+*** In order to maintain good and clean functionality for testing and smooth operation, I added a few class methods and Sets for this projects. A few examples of this are my Project.java addWorker, removeWorker and getProjectWorkers methods and projectWorkers/missingQualification global sets. I also added addProject, removeProject, global int workLoad and global set workerProjects to Projects.java in order for it to work seamlessly with the rest of the project code.

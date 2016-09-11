@@ -104,11 +104,12 @@ public class Company {
 		while(it.hasNext()){
 			Object comparee = it.next();
 			if(comparee instanceof Project){
-				employee.removeProject((Project)comparee);
+				//employee.removeProject((Project)comparee);
 				((Project)comparee).removeWorker(employee);
 				if(((Project) comparee).missingQualifications().size() > 0 && ((Project)comparee).getStatus() == ProjectStatus.ACTIVE){
 					((Project)comparee).setStatus(ProjectStatus.SUSPENDED);
 				}
+				it.remove();
 			}
 		}
 		assignedWorkerPool.remove((Worker)employee);
@@ -133,11 +134,12 @@ public class Company {
 			while(it.hasNext()){
 				Object comparee = it.next();
 				if(comparee instanceof Worker){
-					proj.removeWorker((Worker)comparee);
+					//proj.removeWorker((Worker)comparee);
 					((Worker) comparee).removeProject(proj);
 					if(((Worker)comparee).workerProjects.size() == 0){
 						assignedWorkerPool.remove((Worker)comparee);
 					}
+					it.remove();
 				}
 			}
 			proj.setStatus(ProjectStatus.FINISHED);

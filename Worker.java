@@ -11,7 +11,7 @@ public class Worker {
 	protected Set<Qualification> workerQualifications;
 	protected double workerSalary = 0.0;
 	protected int workLoad = 0;
-	protected Set<Project> workerProjects = new HashSet<Project>(); //MAYBE?!?!
+	protected Set<Project> workerProjects = new HashSet<Project>();
 
 	public Worker(String nName, Set<Qualification> qualifications){
 		this.Name=nName;
@@ -88,23 +88,6 @@ public class Worker {
 	public boolean willOverload(Project proj) {
 		int tempp = 0;
 		boolean ret = false;
-//		Iterator<Project> it = this.workerProjects.iterator();
-//		while(it.hasNext()){
-//			Object comparee = it.next();
-//			if(comparee instanceof Project){
-//				if(((Project) comparee).getStatus() == ProjectStatus.ACTIVE){
-//					if(((Project) comparee).getSize() == ProjectSize.BIG){
-//						workLoad += 3;
-//					}else if(((Project) comparee).getSize() == ProjectSize.MEDIUM){
-//						workLoad += 2;
-//					}else if(((Project) comparee).getSize() == ProjectSize.SMALL){
-//						workLoad += 1;
-//					}else{
-//						continue;
-//					}
-//				}
-//			}
-//		}
 		if(proj.getStatus() == ProjectStatus.ACTIVE){
 			if(proj.getSize() == ProjectSize.BIG){
 				tempp = 3;
@@ -119,7 +102,6 @@ public class Worker {
 		if((workLoad + tempp) > 12){
 			ret = true;
 		}
-//		System.out.println(workLoad+tempp);
 		return ret;
 	}
 }
